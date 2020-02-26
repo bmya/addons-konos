@@ -41,7 +41,16 @@
                     <tr>
                         <td><span t-field="o.employee_id.identification_id"/></td>
                         <td><span t-field="o.employee_id.name"/></td>
-                        <td>001</td>
+
+                        <t t-if="o.contract_id.analytic_account_id">
+                            <td><span t-field="o.contract_id.analytic_account_id.code"/></td>   
+                        </t>
+                        <t t-if="not o.contract_id.analytic_account_id">
+                            <td>001</td>
+                        </t>
+
+
+
                     </tr>
                   </tbody>
                 </table>
@@ -204,7 +213,7 @@
                        <td style="vertical-align:top;">
                           <table class="table-condensed" width="100%">
                              <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="p">
-                                <t t-if="('Prevision' ==p.category_id.name) or ('Salud' ==p.category_id.name) or ('Descuentos' ==p.category_id.name) or ('Otros Descuentos' ==p.category_id.name) or ('TOD' == p.code) or ('TODELE' == p.code)">
+                                <t t-if="('Prevision' ==p.category_id.name) or ('Previsión' ==p.category_id.name) or ('Salud' ==p.category_id.name) or ('Descuentos' ==p.category_id.name) or ('Otros Descuentos' ==p.category_id.name) or ('TOD' == p.code) or ('TODELE' == p.code)">
                                    <td>
                                        <t t-if=" ('Subtotal' ==p.category_id.name)">
                                          <strong><span t-field="p.name"/></strong>
